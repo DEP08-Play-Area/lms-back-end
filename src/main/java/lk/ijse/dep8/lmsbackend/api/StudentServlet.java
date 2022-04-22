@@ -7,10 +7,13 @@ import jakarta.json.bind.JsonbException;
 import lk.ijse.dep8.lmsbackend.dto.StudentDTO;
 import lk.ijse.dep8.lmsbackend.exception.ValidationException;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +21,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentServlet extends HttpServlet {
+
+    private volatile DataSource pool;
+
+    public StudentServlet() {
+    }
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            InitialContext ctx = new InitialContext();
+            pool = (DataSource) ctx.lookup("java:comp/env/jdbc/pool4lms");
+
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);

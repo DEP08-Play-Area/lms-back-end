@@ -5,6 +5,7 @@ public class StudentDTO {
     private String email;
     private String nic;
 
+
     public StudentDTO() {
     }
 
