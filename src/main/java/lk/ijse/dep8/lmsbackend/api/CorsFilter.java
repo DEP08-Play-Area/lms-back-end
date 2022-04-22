@@ -18,7 +18,9 @@ public class CorsFilter extends HttpFilter {
         if(origin != null && origin.contains("localhost:1234")){
             res.setHeader("Access-Control-Allow-Origin",origin);
             if(req.getMethod().equals("OPTIONS")){
-                res.setHeader("Access-Control-Allow-Methods",);
+                res.setHeader("Access-Control-Allow-Methods","GET, PUT, POST, DELETE, HEAD, OPTIONS");
+                res.setHeader("Access-Control-Allow-Headers","Content-Type");
+                res.setHeader("Access-Control-Expose-Headers","Content-Type");
             }
         }
         chain.doFilter(req,res);
