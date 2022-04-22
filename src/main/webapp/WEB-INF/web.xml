@@ -15,6 +15,9 @@
     </servlet>
 
 
+    <resource-env-ref>
+        <resource-env-ref-name>jdbc/pool4lms</resource-env-ref-name>
+    </resource-env-ref>
 
 
 
